@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-4">
+    <img src='http://image.tmdb.org/t/p/w500{{movie.poster_path}}' width="200" height="300" />
+  </div>
+  <div class="col-md-8">
+    <a routerLink="/info/{{movie.id}}">
+      <h4>{{movie.title}}</h4>
+    </a>
+    <div class="row">
+      <label class="col-md-2">Année:</label>
+      <span class="col-md-8">{{movie.release_date | date:'yyyy'}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-2">Note:</label>
+      <div class="row col-md-10">
+        <!-- <rating class="col-md-6" ng-model="movie.vote_average" max="10" readonly="true"></rating> -->
+        (<span>{{movie.vote_count}}</span>&nbsp;avis)
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<!-- <div *ngIf="movies">
+
+  <h1>Popular movies : {{movies.page}}/{{movies.total_pages}}</h1>
+  <ul>
+    <li *ngFor="let movie of movies.results">
+      {{movie.title}}
+    </li>
+  </ul>
+</div> -->
+
+<div *ngIf="movies" class="movies-container" id="top" loading="loading">
+    <div class="row" [hidden]="movies.results.length < 2">
+        <a click="clickPredicateName()" class="col-md-offset-7 col-md-2">Trier par nom</a>
+        <a click="clickPredicateRate()" class="col-md-2">Trier par note</a>
+    </div>
+    <ul class="movies">
+      <li *ngFor="let movie of movies.results">
+
+        <ca-movie-preview [movie]="movie"></ca-movie-preview>
+      </li>
+    </ul>
+    <div class="row">
+        <!-- <div class="col-md-9 col-md-offset-3">
+            <pagination total-items="totalPages" ng-model="$parent.currentPage" ng-change="pageChanged()" items-per-page="20" max-size="5" boundary-links="true"></pagination>
+        </div> -->
+    </div>
+</div>
