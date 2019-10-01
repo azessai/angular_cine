@@ -25,6 +25,7 @@ export class MovieListComponent implements OnInit {
     //   map(item => item)
     // ).subscribe(console.log);
     this.movies$ = this.movieService.popularMovies(this.currentPage);
+//    this.movies$ = this.movieService.searchMovies('Le', this.currentPage);
     this.movies$.subscribe(movies => (this.movies = movies));
 //    this.movies$.subscribe(movies => {this.movies = movies; console.log(this.movies.results)});
   }

@@ -22,20 +22,17 @@ export interface ApiMovies {
 })
 export class MovieService {
 
+  private url = 'https://api.themoviedb.org/3/movie/';
+  private searchUrl = 'https://api.themoviedb.org/3/search/movie';
+  private apiKey = '68b4fe2a513155a58dd0af4adacb281b';
+  private language;
+
   constructor(private httpClient: HttpClient) { }
-  getMovieInfo(id: string): Observable<Movie> {
-    return this.httpClient.get<ApiMovie>(`http://localhost:3000/info/${id}`).
-    pipe(
-      map(movie => new Movie(movie)),
-      retry(3),
-      catchError(err => {
-        console.warn(err);
-        return EMPTY;
-      })
-    );
-  }
+
+
+
   popularMovies(page: number): Observable<Movies> {
-    return this.httpClient.get<ApiMovies>(`http://localhost:3000/popular?page=${page}`).
+    return this.httpClient.get<ApiMovies>(`${this.url}popular?api_key=${this.apiKey}&language=${this.language}&page=${page}`).
     pipe(
       map(item => new Movies({
         page: item.page,
@@ -50,8 +47,24 @@ export class MovieService {
       })
     );
   }
+
+
+
+  getMovieInfo(id: string): Observable<Movie> {
+    return this.httpClient.get<ApiMovie>(`${this.url}${id}?api_key=${this.apiKey}&language=${this.language}`).
+    pipe(
+      map(movie => new Movie(movie)),
+      retry(3),
+      catchError(err => {
+        console.warn(err);
+        return EMPTY;
+      })
+    );
+  }
+
   searchMovies(query: string, page: number): Observable<Movies> {
-    return this.httpClient.get<ApiMovies>(`http://localhost:3000/search?q=${query}&page=${page}`).
+    return this.httpClient.get<ApiMovies>(`${this.searchUrl}?api_key=${this.apiKey}&language=${this.language}&query=${query}&page=${page}`).
+
     pipe(
       map(item => new Movies({
         page: item.page,
