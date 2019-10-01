@@ -12,6 +12,7 @@ import { Movie } from '../models/movie';
 export class MovieInfoComponent {
 
   movie: Movie;
+  loading = true;
   movie$ = this.activatedRoute.paramMap
   .pipe(
     map(paramMap => paramMap.get('movieId')),
@@ -24,7 +25,10 @@ export class MovieInfoComponent {
 
 
   constructor(private activatedRoute: ActivatedRoute, private movieService: MovieService) {
-    this.movie$.subscribe(movie => this.movie = movie);
+    this.movie$.subscribe(movie => {
+      this.movie = movie;
+      this.loading = false;
+    });
   }
 
 

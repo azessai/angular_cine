@@ -1,20 +1,13 @@
-<!-- <div *ngIf="movies">
-
-  <h1>Popular movies : {{movies.page}}/{{movies.total_pages}}</h1>
-  <ul>
-    <li *ngFor="let movie of movies.results">
-      {{movie.title}}
-    </li>
-  </ul>
-</div> -->
-
 <div *ngIf="movies" class="movies-container" id="top" loading="loading">
     <div class="row" [hidden]="movies.results.length < 2">
-        <a click="clickPredicateName()" class="col-md-offset-7 col-md-2">Trier par nom</a>
-        <a click="clickPredicateRate()" class="col-md-2">Trier par note</a>
+        <!-- <a (click)="clickPredicateName()" class="col-md-offset-7 col-md-2">Trier par nom</a> -->
+        <button type="button" class="btn btn-link col-md-offset-7 col-md-2"
+          (click)="clickPredicateName()">Trier par nom</button>
+        <button type="button" class="btn btn-link col-md-2"
+          (click)="clickPredicateName()">Trier par note</button>
     </div>
     <ul class="movies">
-      <li *ngFor="let movie of movies.results">
+      <li *ngFor="let movie of movies.results>
 
         <ca-movie-preview [movie]="movie"></ca-movie-preview>
       </li>
