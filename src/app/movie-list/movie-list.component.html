@@ -4,10 +4,10 @@
         <button type="button" class="btn btn-link col-md-offset-7 col-md-2"
           (click)="clickPredicateName()">Trier par nom</button>
         <button type="button" class="btn btn-link col-md-2"
-          (click)="clickPredicateName()">Trier par note</button>
+          (click)="clickPredicateRate()">Trier par note</button>
     </div>
     <ul class="movies">
-      <li *ngFor="let movie of movies.results>
+      <li *ngFor="let movie of movies.results | orderBy: orderByPredicate : orderByReverse ">
 
         <ca-movie-preview [movie]="movie"></ca-movie-preview>
       </li>

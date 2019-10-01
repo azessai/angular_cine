@@ -7,6 +7,7 @@ import { MovieListComponent } from './movie-list/movie-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MovieInfoComponent } from './movie-info/movie-info.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

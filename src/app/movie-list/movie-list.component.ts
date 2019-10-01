@@ -13,7 +13,8 @@ export class MovieListComponent implements OnInit {
   movies$: Observable<Movies>;
   currentPage = 1;
   movies: Movies;
-
+  orderByPredicate = 'title';
+  orderByReverse = false;
   constructor(
     private movieService: MovieService,
     private httpClient: HttpClient
@@ -29,6 +30,12 @@ export class MovieListComponent implements OnInit {
     this.movies$.subscribe(movies => (this.movies = movies));
 //    this.movies$.subscribe(movies => {this.movies = movies; console.log(this.movies.results)});
   }
-  clickPredicateName() {}
-  clickPredicateRate() {}
+  clickPredicateName() {
+    this.orderByReverse = !this.orderByReverse;
+    this.orderByPredicate = 'title';
+  }
+  clickPredicateRate() {
+    this.orderByReverse = !this.orderByReverse;
+    this.orderByPredicate = 'vote_average';
+  }
 }

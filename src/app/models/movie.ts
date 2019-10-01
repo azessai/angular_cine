@@ -8,6 +8,7 @@ export class Movie {
   production_countries: string;
   genre: string;
   popularity: number;
+  vote_average: number;
 
   constructor(args: Partial<Movie> = {}) {
     this.title = args.title;
@@ -19,5 +20,6 @@ export class Movie {
     this.genre = args.genre;
     this.production_countries = args.production_countries;
     this.popularity = args.popularity;
+    this.vote_average = args.vote_average;
   }
 }
