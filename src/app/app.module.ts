@@ -8,21 +8,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
 import { OrderModule } from 'ngx-order-pipe';
+import { MovieHeaderComponent } from './movie-header/movie-header.component';
+import { MovieSearchComponent } from './movie-search/movie-search.component';
+import { MoviePopularComponent } from './movie-popular/movie-popular.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieListComponent,
     MoviePreviewComponent,
-    MovieInfoComponent
+    MovieInfoComponent,
+    MovieHeaderComponent,
+    MovieSearchComponent,
+    MoviePopularComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    OrderModule
+    OrderModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
