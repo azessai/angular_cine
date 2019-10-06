@@ -15,7 +15,7 @@ export class MovieHeaderComponent{
   });
   constructor( private router: Router) { }
   searchAction() {
-    this.query = this.movieSearchForm.value['query'];
+    this.query = this.movieSearchForm.value.query;
     this.router.navigate(['search/', this.query]);
   }
 }

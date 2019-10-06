@@ -1,13 +1,14 @@
 <div class="container">
 
   <div *ngIf="movies" class="movies-container" id="top" loading="loading">
-    <div class="row" [hidden]="movies.results.length < 2">
-      <!-- <a (click)="clickPredicateName()" class="col-md-offset-7 col-md-2">Trier par nom</a> -->
-      <button type="button" class="btn btn-link col-md-offset-7 col-md-2" (click)="clickPredicateName()">Trier par
-        nom</button>
-      <button type="button" class="btn btn-link col-md-2" (click)="clickPredicateRate()">Trier par note</button>
-    </div>
+
     <ul class="movies">
+      <div class="row" [hidden]="movies.results.length < 2">
+        <button type="button" class="btn btn-link col-md-offset-7 col-md-2" (click)="clickPredicateName()">Trier par
+          nom</button>
+        <button type="button" class="btn btn-link col-md-2" (click)="clickPredicateRate()">Trier par note</button>
+      </div>
+
       <li *ngFor="let movie of movies.results | orderBy: orderByPredicate : orderByReverse ">
 
         <ca-movie-preview [movie]="movie"></ca-movie-preview>

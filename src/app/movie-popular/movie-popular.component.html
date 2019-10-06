@@ -1,1 +1,5 @@
+<div *ngIf="movies" class="row" >
+  <button [disabled]="currentPage == 1" type="button" class="btn btn-link col-md-offset-7 col-md-2" (click)="precedent()">Précédent</button>
+  <button [disabled]="currentPage == movies.total_pages" type="button" class="btn btn-link col-md-2" (click)="suivant()">Suivant</button>
+</div>
 <ca-movie-list [movies]="movies"></ca-movie-list>

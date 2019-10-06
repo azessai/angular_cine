@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'info/:movieId', component: MovieInfoComponent },
   {path: 'search/:query', component: MovieSearchComponent },
   {path: 'popular', component: MoviePopularComponent },
-  {path: '**', component: MovieListComponent }
+  {path: '**', component: MoviePopularComponent }
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Movies } from '../models/movies';
 
 @Component({
@@ -13,8 +13,8 @@ export class MovieListComponent {
   orderByPredicate = 'title';
   orderByReverse = false;
   constructor() {
-//    console.log(this.movies);
   }
+
 
 
   clickPredicateName() {
