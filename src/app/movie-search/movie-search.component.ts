@@ -22,7 +22,6 @@ export class MovieSearchComponent implements OnInit {
 
   ngOnInit() {
     this.currentPage = 1;
-    console.log('init: ' + this.currentPage);
     const newMovies = new Movies({page: 0, total_results: 0, total_pages: 0, results: []});
     this.movies = newMovies;
     this.moviesLoad();
