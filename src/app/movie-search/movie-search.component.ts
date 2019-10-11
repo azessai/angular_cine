@@ -27,7 +27,7 @@ export class MovieSearchComponent implements OnInit {
     this.movies = newMovies;
     this.moviesLoad();
   }
-  private moviesLoad() {
+  moviesLoad() {
     this.movies$ = this.activatedRoute.paramMap
       .pipe(map(paramMap => paramMap.get('query')),
       switchMap(query => this.movieService.searchMovies(query, this.currentPage)),
@@ -36,7 +36,7 @@ export class MovieSearchComponent implements OnInit {
         refCount: true
       }));
     //    this.movies$.subscribe(movies => (this.movies = movies));
-    this.movies$.subscribe(movies => { this.movies = movies; });
+    this.movies$.subscribe(movies => { this.movies = movies; this.currentPage = movies.page; console.log('PAGE' + movies.page); });
   }
 
   precedent() {

@@ -6,7 +6,10 @@ export class Movie {
   vote_count: number;
   overview: string;
   production_countries: string;
-  genre: string;
+  genres: {
+    id: number,
+    name: string
+  }[]
   popularity: number;
   vote_average: number;
 
@@ -17,7 +20,7 @@ export class Movie {
     this.release_date = args.release_date;
     this.vote_count = args.vote_count;
     this.overview = args.overview;
-    this.genre = args.genre;
+    this.genres = args.genres;
     this.production_countries = args.production_countries;
     this.popularity = args.popularity;
     this.vote_average = args.vote_average;
