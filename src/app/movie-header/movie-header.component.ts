@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class MovieHeaderComponent{
 
+  @Output() initPage = new EventEmitter<number>();
   query: string;
   movieSearchForm = new FormGroup({
     query: new FormControl()
@@ -17,5 +18,6 @@ export class MovieHeaderComponent{
   searchAction() {
     this.query = this.movieSearchForm.value.query;
     this.router.navigate(['search/', this.query]);
+    this.initPage.emit(1);
   }
 }

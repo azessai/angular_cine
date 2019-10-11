@@ -36,7 +36,7 @@ export class MovieSearchComponent implements OnInit {
         refCount: true
       }));
     //    this.movies$.subscribe(movies => (this.movies = movies));
-    this.movies$.subscribe(movies => { this.movies = movies; this.currentPage = movies.page; console.log('PAGE' + movies.page); });
+    this.movies$.subscribe(movies => { this.movies = movies; this.currentPage = movies.page; });
   }
 
   precedent() {
@@ -52,5 +52,8 @@ export class MovieSearchComponent implements OnInit {
     if (this.currentPage >= 1 && this.currentPage <= this.movies.total_pages) {
       this.moviesLoad();
     }
+  }
+  research(page: number) {
+    this.currentPage = page;
   }
 }
