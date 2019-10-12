@@ -16,6 +16,7 @@ export class MovieSearchComponent implements OnInit {
   movies: Movies;
   movies$: Observable<Movies>;
   currentPage: number;
+  query: string;
 
   constructor(private movieService: MovieService, private activatedRoute: ActivatedRoute) { }
 
@@ -25,15 +26,16 @@ export class MovieSearchComponent implements OnInit {
     const newMovies = new Movies({page: 0, total_results: 0, total_pages: 0, results: []});
     this.movies = newMovies;
     this.moviesLoad();
+
+    this.activatedRoute.params.subscribe(
+      params => {
+        this.query = params.query;
+        this.currentPage = 1;
+        this.moviesLoad();
+      });
   }
   moviesLoad() {
-    this.movies$ = this.activatedRoute.paramMap
-      .pipe(map(paramMap => paramMap.get('query')),
-      switchMap(query => this.movieService.searchMovies(query, this.currentPage)),
-      shareReplay({
-        bufferSize: 1,
-        refCount: true
-      }));
+    this.movies$ = this.movieService.searchMovies(this.query, this.currentPage);
     //    this.movies$.subscribe(movies => (this.movies = movies));
     this.movies$.subscribe(movies => { this.movies = movies; this.currentPage = movies.page; });
   }
@@ -53,6 +55,6 @@ export class MovieSearchComponent implements OnInit {
     }
   }
   research(page: number) {
-    this.currentPage = page;
+    // this.currentPage = page;
   }
 }

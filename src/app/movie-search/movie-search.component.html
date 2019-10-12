@@ -1,11 +1,11 @@
-<ca-movie-header (initPage)="research($event)"></ca-movie-header>
-<div *ngIf="movies" class="row" >
-    <span>curr {{currentPage}}</span>
-    <span>moviepage {{movies.page}}</span>
-    <button [disabled]="currentPage == 1 || movies.total_pages == 0"
-          type="button" class="btn btn-link col-md-offset-7 col-md-2"
-          (click)="precedent()">Précédent</button>
-    <button [disabled]="currentPage == movies.total_pages || movies.total_pages == 0"
-          type="button" class="btn btn-link col-md-2" (click)="suivant()">Suivant</button>
+<div *ngIf="movies">
+  <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;Search : {{query}}</div>
+  <span>curr {{currentPage}}</span> -- <span>moviepage {{movies.page}}</span>
+  <div class="row">
+    <button [disabled]="currentPage == 1 || movies.total_pages == 0" type="button"
+      class="btn btn-link col-md-offset-7 col-md-2" (click)="precedent()">Précédent</button>
+    <button [disabled]="currentPage == movies.total_pages || movies.total_pages == 0" type="button"
+      class="btn btn-link col-md-2" (click)="suivant()">Suivant</button>
   </div>
-<ca-movie-list [movies]="movies"></ca-movie-list>
+  <ca-movie-list [movies]="movies"></ca-movie-list>
+</div>
