@@ -1,12 +1,13 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { MovieService } from '../service/movie.service';
 import { Movies } from '../models/movies';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap, shareReplay } from 'rxjs/operators';
-@Injectable({
-  providedIn: 'root'
-})
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MovieListModule } from '../movie-list/movie-list.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
 @Component({
   selector: 'ca-movie-search',
   templateUrl: './movie-search.component.html',
@@ -58,3 +59,20 @@ export class MovieSearchComponent implements OnInit {
     // this.currentPage = page;
   }
 }
+
+@NgModule({
+  declarations: [
+    MovieSearchComponent
+  ],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MovieListModule,
+    MatIconModule,
+    MatGridListModule
+  ],
+  exports: [
+    MovieSearchComponent
+  ]
+})
+export class MovieSearchModule { }

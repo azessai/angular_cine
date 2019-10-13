@@ -1,5 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { Movie } from '../models/movie';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'ca-movie-preview',
@@ -15,3 +19,19 @@ export class MoviePreviewComponent implements OnInit {
   }
 
 }
+
+@NgModule({
+  declarations: [
+    MoviePreviewComponent
+  ],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    RouterModule,
+    MatCardModule
+  ],
+  exports: [
+    MoviePreviewComponent
+  ]
+})
+export class MoviePreviewModule { }

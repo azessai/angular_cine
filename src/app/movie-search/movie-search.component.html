@@ -1,11 +1,32 @@
-<div *ngIf="movies">
-  <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;Search : {{query}}</div>
-  <span>curr {{currentPage}}</span> -- <span>moviepage {{movies.page}}</span>
-  <div class="row">
-    <button [disabled]="currentPage == 1 || movies.total_pages == 0" type="button"
-      class="btn btn-link col-md-offset-7 col-md-2" (click)="precedent()">Précédent</button>
-    <button [disabled]="currentPage == movies.total_pages || movies.total_pages == 0" type="button"
-      class="btn btn-link col-md-2" (click)="suivant()">Suivant</button>
-  </div>
+<div *ngIf="movies" class="container">
+  <div class="row"><b>Résultats de la recherche : {{query}}</b></div>
+
+  <mat-grid-list cols="2" rowHeight="20px">
+      <mat-grid-tile>
+        <button button="submit" mat-icon-button color="primary" (click)="precedent()">
+          <mat-icon>chevron_left</mat-icon>Précédent
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button button="submit" mat-icon-button color="primary" (click)="suivant()">
+          <mat-icon>chevron_right</mat-icon>Suivant
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+
   <ca-movie-list [movies]="movies"></ca-movie-list>
+
+  <mat-grid-list cols="2" rowHeight="20px">
+      <mat-grid-tile>
+        <button button="submit" mat-icon-button color="primary" (click)="precedent()">
+          <mat-icon>chevron_left</mat-icon>Précédent
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button button="submit" mat-icon-button color="primary" (click)="suivant()">
+          <mat-icon>chevron_right</mat-icon>Suivant
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
 </div>

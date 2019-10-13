@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Movies } from '../models/movies';
 import { MovieService } from '../service/movie.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MovieListModule } from '../movie-list/movie-list.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'ca-movie-popular',
@@ -40,3 +45,20 @@ export class MoviePopularComponent implements OnInit {
     }
   }
 }
+
+@NgModule({
+  declarations: [
+    MoviePopularComponent
+  ],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MovieListModule,
+    MatIconModule,
+    MatGridListModule
+  ],
+  exports: [
+    MoviePopularComponent
+  ]
+})
+export class MoviePopularModule { }

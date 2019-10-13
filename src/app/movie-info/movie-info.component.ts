@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../service/movie.service';
 import { map, switchMap, shareReplay } from 'rxjs/operators';
 import { Movie } from '../models/movie';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'ca-movie-info',
@@ -31,6 +33,18 @@ export class MovieInfoComponent {
     });
   }
 
-
-
 }
+
+@NgModule({
+  declarations: [
+    MovieInfoComponent
+  ],
+  imports: [
+    CommonModule,
+    MatButtonModule
+  ],
+  exports: [
+    MovieInfoComponent
+  ]
+})
+export class MovieInfoModule { }
