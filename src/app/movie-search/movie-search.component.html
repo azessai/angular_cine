@@ -1,19 +1,6 @@
 <div *ngIf="movies" class="container">
   <div class="row"><b>Résultats de la recherche : {{query}}</b></div>
 
-  <mat-grid-list cols="2" rowHeight="20px">
-      <mat-grid-tile>
-        <button button="submit" mat-icon-button color="primary" (click)="precedent()">
-          <mat-icon>chevron_left</mat-icon>Précédent
-        </button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button button="submit" mat-icon-button color="primary" (click)="suivant()">
-          <mat-icon>chevron_right</mat-icon>Suivant
-        </button>
-      </mat-grid-tile>
-    </mat-grid-list>
-
 
   <ca-movie-list [movies]="movies"></ca-movie-list>
 

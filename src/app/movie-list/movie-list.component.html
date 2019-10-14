@@ -2,7 +2,7 @@
 
   <div *ngIf="movies" class="movies-container" id="top" loading="loading">
 
-      <div class="row liste" [hidden]="movies.results.length < 2">
+      <div class="row" [hidden]="movies.results.length < 2">
         <mat-grid-list cols="2" rowHeight="20px">
           <mat-grid-tile>
             <button button="submit" mat-raised-button color="primary" (click)="clickPredicateName()">
