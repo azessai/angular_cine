@@ -13,11 +13,9 @@
     <div class="row" class="search">
       <form [formGroup]="movieSearchForm" (ngSubmit)="searchAction()">
         <mat-form-field>
-          <mat-grid-list cols="2" rowHeight="20px">
+          <mat-grid-list cols="1" rowHeight="20px">
             <mat-grid-tile><input matInput placeholder="Le loup de Wall-Street, Django..." type="text"
-                formControlName="query" width="30px"></mat-grid-tile>
-            <mat-grid-tile><button button="submit" mat-icon-button color="primary">
-                <mat-icon>search</mat-icon>
+                formControlName="query" width="30px"><button button="submit" hidden="true" color="primary">
               </button>
             </mat-grid-tile>
           </mat-grid-list>

@@ -15,7 +15,7 @@
               <span class="col-md-8">{{movie.release_date | date:'yyyy'}}</span>
             </div>
             <div class="row">
-              <label class="col-md-2">Note:</label>
+              <label class="col-md-2">Note: {{movie.vote_average}}</label>
               <div class="row col-md-10">
                 <!-- <rating class="col-md-6" ng-model="movie.vote_average" max="10" readonly="true"></rating> -->
                 (<span>{{movie.vote_count}}</span>&nbsp;avis)

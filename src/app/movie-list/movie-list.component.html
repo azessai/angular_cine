@@ -2,8 +2,10 @@
 
   <div *ngIf="movies" class="movies-container" id="top" loading="loading">
 
-      <div class="row" [hidden]="movies.results.length < 2">
+      <div  class="row" [hidden]="movies.results.length < 2">
         <mat-grid-list cols="2" rowHeight="20px">
+          <mat-grid-tile>
+          </mat-grid-tile>
           <mat-grid-tile>
             <button button="submit" mat-raised-button color="primary" (click)="clickPredicateName()">
               <mat-icon>sort</mat-icon>Trier par Nom
@@ -11,8 +13,6 @@
             <button button="submit" mat-raised-button color="primary" (click)="clickPredicateRate()">
               <mat-icon>sort</mat-icon>Trier par Note
             </button>
-          </mat-grid-tile>
-          <mat-grid-tile>
           </mat-grid-tile>
         </mat-grid-list>
       </div>
