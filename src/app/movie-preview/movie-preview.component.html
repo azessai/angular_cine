@@ -1,7 +1,7 @@
 <div class="container" *ngIf="movie">
 
-<mat-card class="example-card">
-    <mat-card-header>
+<mat-card class="movie-card">
+    <mat-card-header class="row">
       <mat-card-title>
         <a [routerLink]="['/info', movie.id ]">
         <h4>{{movie.title}}</h4>
@@ -10,17 +10,12 @@
     </mat-card-header>
     <img mat-card-image *ngIf="movie.poster_path" src='https://image.tmdb.org/t/p/w500/{{movie.poster_path}}' alt="Photo of {{movie.title}}">
     <mat-card-content>
-          <div class="row">
-              <label class="col-md-2">Année:</label>
-              <span class="col-md-8">{{movie.release_date | date:'yyyy'}}</span>
-            </div>
-            <div class="row">
-              <label class="col-md-2">Note: {{movie.vote_average}}</label>
-              <div class="row col-md-10">
-                <!-- <rating class="col-md-6" ng-model="movie.vote_average" max="10" readonly="true"></rating> -->
-                (<span>{{movie.vote_count}}</span>&nbsp;avis)
-              </div>
-            </div>
+
+      <span>Année: {{movie.release_date | date:'yyyy'}}</span><br>
+      <span>Note: {{movie.vote_average}}</span><br>
+      <span>Avis: {{movie.vote_count}}</span>
+<!-- <rating class="col-md-6" ng-model="movie.vote_average" max="10" readonly="true"></rating> -->
+
     </mat-card-content>
   </mat-card>
 </div>
