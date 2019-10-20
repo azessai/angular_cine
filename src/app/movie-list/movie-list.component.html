@@ -2,22 +2,24 @@
 
   <div *ngIf="movies" class="movies-container" id="top" loading="loading">
 
-      <div  class="row" [hidden]="movies.results.length < 2">
-        <mat-grid-list cols="2" rowHeight="20px">
-          <mat-grid-tile>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <button button="submit" mat-raised-button color="primary" (click)="clickPredicateName()">
-              <mat-icon>sort</mat-icon>Trier par Nom
-            </button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button button="submit" mat-raised-button color="primary" (click)="clickPredicateRate()">
-              <mat-icon>sort</mat-icon>Trier par Note
-            </button>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-      <div *ngFor="let movie of movies.results | orderBy: orderByPredicate : orderByReverse ">
-        <ca-movie-preview [movie]="movie"></ca-movie-preview>
-      </div>
+    <div class="row" [hidden]="movies.results.length < 2">
+      <mat-grid-list cols="2" rowHeight="20px">
+        <mat-grid-tile>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <button button="submit" mat-raised-button color="primary" (click)="clickPredicateName()">
+            <mat-icon *ngIf="!orderByReverse && orderByPredicate=='title'">arrow_downward</mat-icon>
+            <mat-icon *ngIf="orderByReverse && orderByPredicate=='title'">arrow_upward</mat-icon>Nom
+          </button>&nbsp;&nbsp;&nbsp;&nbsp;
+          <button button="submit" mat-raised-button color="primary" (click)="clickPredicateRate()">
+            <mat-icon *ngIf="!orderByReverse && orderByPredicate=='vote_average'">arrow_downward</mat-icon>
+            <mat-icon *ngIf="orderByReverse && orderByPredicate=='vote_average'">arrow_upward</mat-icon>Note
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div *ngFor="let movie of movies.results | orderBy: orderByPredicate : orderByReverse ">
+      <ca-movie-preview [movie]="movie"></ca-movie-preview>
+    </div>
   </div>
 </div>

@@ -29,6 +29,7 @@ export class MoviePopularComponent implements OnInit {
     this.currentPage = 0;
     this.movies = new Movies({page: 0, total_results: 0, total_pages: 0, results: []});
     this.moviesLoad();
+    // this.movieService.listGenre().subscribe(data => {  console.log(data); });
   }
   private moviesLoad() {
     console.log(this.currentPage + ' loadM ' + this.pageSize);
