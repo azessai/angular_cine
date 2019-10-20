@@ -1,7 +1,7 @@
 .movie-card {
   max-width: 300px;
   margin: 15px;
-  background-color: burlywood;
+  background-color: rgb(199, 205, 235);
 
 }
 mat-card img {
@@ -12,11 +12,6 @@ mat-card img {
   margin-left: 20px;
 }
 
-
-.mat-card-title {
-  margin-top: 20px;
-}
-
 div.container {
   padding-left: 40px;
 }
@@ -24,4 +19,13 @@ div.container {
 .mat-card-content {
   font-size: 14px;
   padding-left: 20px;
+}
+
+.mat-icon{
+  height:20px !important;
+  width:20px !important;
+  font-size:22px !important;
+}
+.mat-icon-button {
+  width: 20px;
 }

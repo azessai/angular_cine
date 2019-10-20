@@ -1,21 +1,26 @@
 <div class="container" *ngIf="movie">
 
-<mat-card class="movie-card">
+  <mat-card class="movie-card">
     <mat-card-header class="row">
-      <mat-card-title>
+      <mat-card-title style="margin:-5px;">
         <a [routerLink]="['/info', movie.id ]">
-        <h4>{{movie.title}}</h4>
-      </a>
-    </mat-card-title>
+          <h4>{{movie.title}}</h4>
+        </a>
+      </mat-card-title>
     </mat-card-header>
-    <img mat-card-image *ngIf="movie.poster_path" src='https://image.tmdb.org/t/p/w500/{{movie.poster_path}}' alt="Photo of {{movie.title}}">
+    <img mat-card-image *ngIf="movie.poster_path" src='https://image.tmdb.org/t/p/w500/{{movie.poster_path}}'
+      alt="Photo of {{movie.title}}">
     <mat-card-content>
 
       <span>Année: {{movie.release_date | date:'yyyy'}}</span><br>
-      <span>Note: {{movie.vote_average}}</span><br>
-      <span>Avis: {{movie.vote_count}}</span>
-<!-- <rating class="col-md-6" ng-model="movie.vote_average" max="10" readonly="true"></rating> -->
-
+      <!-- <span>Note: {{movie.vote_average}}</span><br> -->
+      <span>Avis: {{movie.vote_count}}</span><br>
+      <button mat-icon-button [color]="color" *ngFor="let ratingId of ratingArr;index as i" [id]="'star_'+i"
+        matTooltipPosition="above">
+        <mat-icon>
+          {{showIcon(i)}}
+        </mat-icon>
+      </button>
     </mat-card-content>
   </mat-card>
 </div>
