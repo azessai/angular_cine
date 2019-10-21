@@ -1,6 +1,7 @@
 <div *ngIf="movie" class="movie_detail" loading="loading">
   <div class="row">
       <div class="col-md-4">
+        <h1>{{movie.title}}</h1>
           <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" width="300" height="450"/>
       </div>
       <div class="col-md-8">
