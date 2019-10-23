@@ -5,6 +5,7 @@ import { map, switchMap, shareReplay } from 'rxjs/operators';
 import { Movie } from '../models/movie';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'ca-movie-info',
@@ -41,7 +42,8 @@ export class MovieInfoComponent {
   ],
   imports: [
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   exports: [
     MovieInfoComponent
