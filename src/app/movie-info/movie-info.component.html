@@ -1,27 +1,39 @@
-<div *ngIf="movie" class="movie_detail" loading="loading">
-  <div class="row">
-      <div class="col-md-4">
-          <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" width="300" height="450"/>
-      </div>
-      <div class="col-md-8">
+<div *ngIf="movie" class="container" loading="loading">
+  <div fxLayout="row" fxLayoutAlign="center center" class="content">
+    <mat-card class="card">
+      <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+        <h2>{{ movie.title }}</h2>
+        <img
+          *ngIf="movie.poster_path"
+          src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+          width="300"
+          height="450"
+        />
+      </mat-card-title>
+      <mat-card-content>
+        <div class="example-container mat-elevation-z8">
           <dl class="dl-horizontal">
-              <dt>Genres</dt>
-              <dd>
-                  <ul>
-                      <li *ngFor="let genre of movie.genres">{{genre.name}}</li>
-                  </ul>
-              </dd>
-              <dt>Synopsis</dt>
-              <dd>{{movie.overview}}</dd>
-              <dt>Origine</dt>
-              <dd>
-                  <ul>
-                      <li *ngFor="let production of movie.production_countries">{{production.name}}</li>
-                  </ul>
-              </dd>
-              <dt>Date</dt>
-              <dd>{{movie.release_date | date: 'yyyy'}}</dd>
+            <dt>Genres</dt>
+            <dd>
+              <ul>
+                <li *ngFor="let genre of movie.genres">{{ genre.name }}</li>
+              </ul>
+            </dd>
+            <dt>Synopsis</dt>
+            <dd>{{ movie.overview }}</dd>
+            <dt>Origine</dt>
+            <dd>
+              <ul>
+                <li *ngFor="let production of movie.production_countries">
+                  {{ production.name }}
+                </li>
+              </ul>
+            </dd>
+            <dt>Date</dt>
+            <dd>{{ movie.release_date | date: 'yyyy' }}</dd>
           </dl>
-      </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

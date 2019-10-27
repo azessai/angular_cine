@@ -1,5 +1,30 @@
-.movie_detail {
+.container {
   width: 50%;
   margin-left: 20%;
   margin-right: 20%;
+}
+
+.output {
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+p,
+dt {
+  font-weight: bold;
+}
+
+dl,
+dd {
+  font-size: .9rem;
+}
+
+dd {
+  margin-bottom: 1em;
+}
+
+mat-card img {
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+
+  margin-left: 20px;
+
 }
