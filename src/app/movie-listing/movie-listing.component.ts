@@ -8,23 +8,23 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Movies } from '../models/movies';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MovieService } from '../service/movie.service';
 import { MoviesDataSource } from './movies.datasource';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { merge, fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatRippleModule } from '@angular/material/core';
-import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'ca-movie-listing',
@@ -35,7 +35,7 @@ export class MovieListingComponent implements OnInit, AfterViewInit {
   movies: Movies;
   dataSource: MoviesDataSource;
 
-  displayedColumns = ['title', 'id', 'release_date'];
+  displayedColumns = ['title', 'image', 'popularity', 'release_date'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -43,28 +43,29 @@ export class MovieListingComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private router: Router
   ) {}
   ngOnInit() {
     this.dataSource = new MoviesDataSource(this.movieService);
 
-    this.dataSource.loadMovies(0, '', 'asc', 0, 20);
+    this.dataSource.loadMovies('', 'desc', 0, 20);
   }
 
   ngAfterViewInit() {
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
-    // fromEvent(this.input.nativeElement, 'keyup')
-    //   .pipe(
-    //     debounceTime(150),
-    //     distinctUntilChanged(),
-    //     tap(() => {
-    //       this.paginator.pageIndex = 0;
+    fromEvent(this.input.nativeElement, 'keyup')
+      .pipe(
+        debounceTime(150),
+        distinctUntilChanged(),
+        tap(() => {
+          this.paginator.pageIndex = 0;
 
-    //       this.loadMoviesPage();
-    //     })
-    //   )
-    //   .subscribe();
+          this.loadMoviesPage();
+        })
+      )
+      .subscribe();
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(tap(() => this.loadMoviesPage()))
@@ -72,7 +73,22 @@ export class MovieListingComponent implements OnInit, AfterViewInit {
   }
 
   loadMoviesPage() {
-    this.dataSource.loadMovies(0, '', 'asc', this.paginator.pageIndex, 20);
+    console.log(
+      this.input.nativeElement.value,
+      '-',
+      this.paginator.pageIndex,
+      '-'
+    );
+
+    this.dataSource.loadMovies(
+      this.input.nativeElement.value,
+      this.sort.direction,
+      this.paginator.pageIndex,
+      20
+    );
+  }
+  navigate(id: BigInteger) {
+    this.router.navigate(['info', id]);
   }
 }
 
@@ -81,17 +97,18 @@ export class MovieListingComponent implements OnInit, AfterViewInit {
   imports: [
     CommonModule,
     BrowserAnimationsModule,
+    BrowserModule,
     MatPaginatorModule,
     MatIconModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
+    FormsModule,
     MatTableModule,
-    MatPaginator,
-    MatGridListModule,
     MatInputModule,
     MatButtonModule,
-    MatRippleModule,
-    MatCardModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatSortModule
   ],
   exports: [MovieListingComponent]
 })

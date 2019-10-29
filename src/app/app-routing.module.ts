@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MovieInfoModule, MovieInfoComponent } from './movie-info/movie-info.component';
 import { MovieSearchComponent, MovieSearchModule } from './movie-search/movie-search.component';
 import { MoviePopularComponent, MoviePopularModule } from './movie-popular/movie-popular.component';
+import { MovieListingModule, MovieListingComponent } from './movie-listing/movie-listing.component';
 
 
 
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'info/:movieId', component: MovieInfoComponent },
   { path: 'search/:query', component: MovieSearchComponent },
   { path: 'popular', component: MoviePopularComponent },
+  { path: 'listing', component: MovieListingComponent },
   { path: '**', component: MoviePopularComponent }
 ];
 
@@ -18,7 +20,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MovieInfoModule,
     MovieSearchModule,
-    MoviePopularModule
+    MoviePopularModule,
+    MovieListingModule
   ],
   exports: [RouterModule]
 })

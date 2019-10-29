@@ -15,23 +15,33 @@ export class MoviesDataSource implements DataSource<Movie> {
   constructor(private movieService: MovieService) {}
 
   loadMovies(
-    courseId: number,
     filter: string,
     sortDirection: string,
     pageIndex: number,
     pageSize: number
   ) {
+    console.log(filter, '-', sortDirection, '-', pageIndex, '-', pageSize);
     this.loadingSubject.next(true);
-
-    this.movieService
-      .popularMovies(pageIndex + 1).pipe(
-        map(movies => movies.results))
-      .pipe(
-        catchError(() => of([])),
-        finalize(() => this.loadingSubject.next(false))
-      )
-      .subscribe(data => this.MoviesSubject.next(data));
-
+    console.log('-', filter, '-');
+    if ('' + filter !== '0' && filter !== '') {
+      this.movieService
+        .searchMovies(filter, pageIndex + 1)
+        .pipe(map(movies => movies.results))
+        .pipe(
+          catchError(() => of([])),
+          finalize(() => this.loadingSubject.next(false))
+        )
+        .subscribe(data => this.MoviesSubject.next(data));
+    } else {
+      this.movieService
+        .popularDiscoverMovies(pageIndex + 1, sortDirection)
+        .pipe(map(movies => movies.results))
+        .pipe(
+          catchError(() => of([])),
+          finalize(() => this.loadingSubject.next(false))
+        )
+        .subscribe(data => this.MoviesSubject.next(data));
+    }
   }
 
   connect(collectionViewer: CollectionViewer): Observable<Movie[]> {

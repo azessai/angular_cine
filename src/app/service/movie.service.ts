@@ -23,16 +23,18 @@ export interface ApiMovies {
 export class MovieService {
 
   private url = 'https://api.themoviedb.org/3/movie/';
+  private urlDiscover = 'https://api.themoviedb.org/3/discover/movie';
   private searchUrl = 'https://api.themoviedb.org/3/search/movie';
   private apiKey = '68b4fe2a513155a58dd0af4adacb281b';
-  private language;
+  private language = 'en-US';
 
   constructor(private httpClient: HttpClient) { }
 
 
 
   popularMovies(page: number): Observable<Movies> {
-    const localUrl = `${this.url}popular?api_key=${this.apiKey}&language=${this.language}&page=${page}&include_adult=false`;
+    let localUrl = `${this.url}popular?api_key=${this.apiKey}&language=${this.language}`;
+    localUrl += `&page=${page}&include_adult=false`;
     return this.httpClient.get<ApiMovies>(localUrl).
     pipe(
       map(item => new Movies({
@@ -49,7 +51,24 @@ export class MovieService {
     );
   }
 
-
+  popularDiscoverMovies(page: number, sort = 'asc'): Observable<Movies> {
+    let localUrl = `${this.urlDiscover}?api_key=${this.apiKey}&language=${this.language}`;
+    localUrl += `&page=${page}&include_adult=false&sort_by=popularity.${sort}&year=2019`;
+    return this.httpClient.get<ApiMovies>(localUrl).
+    pipe(
+      map(item => new Movies({
+        page: item.page,
+        total_results: item.total_results,
+        total_pages: item.total_pages,
+        results: item.results.map(this.moviesFromApi)
+      })),
+      retry(3),
+      catchError(err => {
+        console.warn(err);
+        return EMPTY;
+      })
+    );
+  }
 
   getMovieInfo(id: string): Observable<Movie> {
     return this.httpClient.get<ApiMovie>(`${this.url}${id}?api_key=${this.apiKey}&language=${this.language}`).
@@ -64,7 +83,8 @@ export class MovieService {
   }
 
   searchMovies(query: string, page: number): Observable<Movies> {
-    const localUrl = `${this.searchUrl}?api_key=${this.apiKey}&language=${this.language}&query=${query}&page=${page}&include_adult=false`;
+    const localUrl = `${this.searchUrl}?api_key=${this.apiKey}&language=${this.language}\
+    &query=${query}&page=${page}&include_adult=false`;
     return this.httpClient.get<ApiMovies>(localUrl).
 
     pipe(
@@ -81,6 +101,7 @@ export class MovieService {
       })
     );
   }
+
   moviesFromApi(movie: ApiMovie) {
     return new Movie(movie);
   }
@@ -89,5 +110,7 @@ export class MovieService {
   listGenre(): Observable<any> {
     return this.httpClient.get<any>(`http://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=${this.language}`);
   }
+
+
 
 }
