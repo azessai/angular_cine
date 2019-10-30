@@ -26,7 +26,7 @@ export class MovieService {
   private urlDiscover = 'https://api.themoviedb.org/3/discover/movie';
   private searchUrl = 'https://api.themoviedb.org/3/search/movie';
   private apiKey = '68b4fe2a513155a58dd0af4adacb281b';
-  private language = 'en-US';
+  private language = 'fr-FR';
 
   constructor(private httpClient: HttpClient) { }
 

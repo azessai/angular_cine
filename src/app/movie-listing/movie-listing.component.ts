@@ -35,7 +35,7 @@ export class MovieListingComponent implements OnInit, AfterViewInit {
   movies: Movies;
   dataSource: MoviesDataSource;
 
-  displayedColumns = ['title', 'image', 'popularity', 'release_date'];
+  displayedColumns = ['title', 'image', 'popularity', 'release_date', 'overview'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
