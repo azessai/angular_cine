@@ -1,6 +1,10 @@
+.search {
+  margin-left: 6%;
+}
+
 .movie-container {
   position: relative;
-  min-height: 200px;
+  /* min-height: 200px; */
 }
 
 .movie-table-container {

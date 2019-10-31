@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { MovieService } from '../service/movie.service';
 import { Movie } from '../models/movie';
+import { Movies } from '../models/movies';
 
 export class MoviesDataSource implements DataSource<Movie> {
   private MoviesSubject = new BehaviorSubject<Movie[]>([]);
@@ -11,6 +12,7 @@ export class MoviesDataSource implements DataSource<Movie> {
   private loadingSubject = new BehaviorSubject<boolean>(false);
 
   public loading$ = this.loadingSubject.asObservable();
+  moviePageList$: Observable<Movies>;
 
   constructor(private movieService: MovieService) {}
 
@@ -24,24 +26,20 @@ export class MoviesDataSource implements DataSource<Movie> {
     this.loadingSubject.next(true);
     console.log('-', filter, '-');
     if ('' + filter !== '0' && filter !== '') {
-      this.movieService
-        .searchMovies(filter, pageIndex + 1)
-        .pipe(map(movies => movies.results))
-        .pipe(
-          catchError(() => of([])),
-          finalize(() => this.loadingSubject.next(false))
-        )
-        .subscribe(data => this.MoviesSubject.next(data));
+      this.moviePageList$ = this.movieService
+        .searchMovies(filter, pageIndex + 1);
     } else {
-      this.movieService
-        .popularDiscoverMovies(pageIndex + 1, sortDirection)
-        .pipe(map(movies => movies.results))
-        .pipe(
-          catchError(() => of([])),
-          finalize(() => this.loadingSubject.next(false))
-        )
-        .subscribe(data => this.MoviesSubject.next(data));
+      this.moviePageList$ = this.movieService
+        .popularDiscoverMovies(pageIndex + 1, sortDirection);
     }
+
+    this.moviePageList$
+    .pipe(map(movies => movies.results))
+    .pipe(
+      catchError(() => of([])),
+      finalize(() => this.loadingSubject.next(false))
+    )
+    .subscribe(data => this.MoviesSubject.next(data));
   }
 
   connect(collectionViewer: CollectionViewer): Observable<Movie[]> {
