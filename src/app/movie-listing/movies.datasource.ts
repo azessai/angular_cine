@@ -1,7 +1,7 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 
-import { catchError, finalize, map } from 'rxjs/operators';
+import { catchError, finalize, map, switchMap, shareReplay, tap } from 'rxjs/operators';
 import { MovieService } from '../service/movie.service';
 import { Movie } from '../models/movie';
 import { Movies } from '../models/movies';
@@ -10,8 +10,12 @@ export class MoviesDataSource implements DataSource<Movie> {
   private MoviesSubject = new BehaviorSubject<Movie[]>([]);
 
   private loadingSubject = new BehaviorSubject<boolean>(false);
-
   public loading$ = this.loadingSubject.asObservable();
+
+  private totalPagesSubject = new BehaviorSubject<number>(0);
+  public totalPages$ = this.totalPagesSubject.asObservable();
+
+  // moviePageList$: Observable<Movies>;
   moviePageList$: Observable<Movies>;
 
   constructor(private movieService: MovieService) {}
@@ -34,7 +38,8 @@ export class MoviesDataSource implements DataSource<Movie> {
     }
 
     this.moviePageList$
-    .pipe(map(movies => movies.results))
+    .pipe(tap(el => this.totalPagesSubject.next(el.total_pages)),
+    map(movies => movies.results))
     .pipe(
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false))
@@ -50,5 +55,6 @@ export class MoviesDataSource implements DataSource<Movie> {
   disconnect(collectionViewer: CollectionViewer): void {
     this.MoviesSubject.complete();
     this.loadingSubject.complete();
+    this.totalPagesSubject.complete();
   }
 }

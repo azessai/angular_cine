@@ -65,7 +65,7 @@
     </mat-table>
 
 
-    <mat-paginator [showFirstLastButtons]="true" [length]="1000" [pageSize]="20" [pageSizeOptions]="[20]">
+    <mat-paginator [showFirstLastButtons]="true" [length]="dataSource.totalPages$ | async" [pageSize]="20" [pageSizeOptions]="[20]">
     </mat-paginator>
 
 
