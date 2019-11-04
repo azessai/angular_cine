@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieHeaderModule } from './movie-header/movie-header.component';
+import { EssaiModule } from './essai/essai.component';
+import { TapDemoModule } from './tap-demo/tap-demo.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { MovieHeaderModule } from './movie-header/movie-header.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MovieHeaderModule
+    MovieHeaderModule,
+    EssaiModule,
+    TapDemoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
