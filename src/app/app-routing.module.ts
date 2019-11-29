@@ -4,6 +4,7 @@ import { MovieInfoModule, MovieInfoComponent } from './movie-info/movie-info.com
 import { MovieSearchComponent, MovieSearchModule } from './movie-search/movie-search.component';
 import { MoviePopularComponent, MoviePopularModule } from './movie-popular/movie-popular.component';
 import { MovieListingModule, MovieListingComponent } from './movie-listing/movie-listing.component';
+import { EssaiComponent } from './essai/essai.component';
 
 
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'search/:query', component: MovieSearchComponent },
   { path: 'popular', component: MoviePopularComponent },
   { path: 'listing', component: MovieListingComponent },
+  { path: 'essai', component: EssaiComponent},
   { path: '**', component: MoviePopularComponent }
 ];
 
